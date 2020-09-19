@@ -5681,7 +5681,7 @@
     ".NETCoreApp,Version=v3.1": [
       "Microsoft.EntityFrameworkcore >= 3.1.8",
       "Microsoft.EntityFrameworkcore.Design >= 3.1.8",
-      "Microsoft.EntityFrameworkcore.SqlServer >= *"
+      "Microsoft.EntityFrameworkcore.SqlServer >= 3.1.8"
     ]
   },
   "packageFolders": {
@@ -5733,7 +5733,7 @@
           },
           "Microsoft.EntityFrameworkcore.SqlServer": {
             "target": "Package",
-            "version": "[*, )"
+            "version": "[3.1.8, )"
           }
         },
         "imports": [
