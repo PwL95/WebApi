@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "3V6lR597GTmMoUZ9Nf+XmFRVgkS6hUwe46J+w/LoIR0Mcs/XRv/t5AmeBIT3jaDdowk4uesfDvvGvcp9U6ZClg==",
+  "dgSpecHash": "B8AGAlGv947cqfSOPpIKRGzdeLBnEyaGJ2wA4rslMkFBS3bl3B+BMLoa8OlGg1kNQJNU9ZiDDMYz9Y84mdVRGA==",
   "success": true,
   "projectFilePath": "C:\\Users\\pw\\desktop\\vscode\\net core 3 api\\Commander\\Commander.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\pw\\.nuget\\packages\\automapper\\9.0.0\\automapper.9.0.0.nupkg.sha512",
+    "C:\\Users\\pw\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",
     "C:\\Users\\pw\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\pw\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "C:\\Users\\pw\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

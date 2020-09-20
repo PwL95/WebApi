@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace Commander
 {
@@ -31,8 +32,12 @@ namespace Commander
                 (Configuration.GetConnectionString("CommanderConnection")));
 
             services.AddControllers();
+
             //register repositories
             services.AddScoped<ICommanderRepo, SqlCommanderRepo>();
+
+            //Add Automapper reference through dependency Injection
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

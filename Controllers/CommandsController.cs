@@ -5,6 +5,8 @@ using Commander.Data;
 using Commander.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using AutoMapper;
+using Commander.Dtos;
 
 namespace Commander.Controllers
 {
@@ -13,14 +15,16 @@ namespace Commander.Controllers
     public class CommandsController: ControllerBase
     {
         private readonly ICommanderRepo _repository;
-        
+        private readonly IMapper _mapper;
+
         /// <summary>
         /// Interface of commands
         /// </summary>
         /// <param name="reposiotry"></param>
-        public CommandsController(ICommanderRepo reposiotry)
+        public CommandsController(ICommanderRepo reposiotry, IMapper mapper)
         {
             _repository = reposiotry;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -29,10 +33,10 @@ namespace Commander.Controllers
         /// <returns></returns>
         //GET api/commands
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Command>>> GetAllCommands(CancellationToken cancellationToken)
+        public async Task<ActionResult<IEnumerable<CommandReadDto>>> GetAllCommands(CancellationToken cancellationToken)
         {
             var result = await _repository.GetAllCommands(cancellationToken);
-            return Ok(result);
+            return Ok(_mapper.Map<IEnumerable<CommandReadDto>>(result));
         }  
 
         //GET api/commands/{id}
@@ -42,10 +46,14 @@ namespace Commander.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<Command>> GetCommandById(int id, CancellationToken cancellationToken)
+        public async Task<ActionResult<CommandReadDto>> GetCommandById(int id, CancellationToken cancellationToken)
         {
             var result = await _repository.GetCommandById(id, cancellationToken);
-            return Ok(result);
+
+            if(result == null)
+                return NotFound();
+
+            return Ok(_mapper.Map<CommandReadDto>(result));
         }
     }
 }
