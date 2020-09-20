@@ -1,7 +1,10 @@
+using System.Threading;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Commander.Data;
 using Commander.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Commander.Controllers
 {
@@ -26,9 +29,9 @@ namespace Commander.Controllers
         /// <returns></returns>
         //GET api/commands
         [HttpGet]
-        public ActionResult<IEnumerable<Command>> GetAllCommands()
+        public async Task<ActionResult<IEnumerable<Command>>> GetAllCommands(CancellationToken cancellationToken)
         {
-            var result = _repository.GetAllCommands();
+            var result = await _repository.GetAllCommands(cancellationToken);
             return Ok(result);
         }  
 
@@ -39,9 +42,9 @@ namespace Commander.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public ActionResult<Command> GetCommandById(int id)
+        public async Task<ActionResult<Command>> GetCommandById(int id, CancellationToken cancellationToken)
         {
-            var result = _repository.GetCommandById(id);
+            var result = await _repository.GetCommandById(id, cancellationToken);
             return Ok(result);
         }
     }

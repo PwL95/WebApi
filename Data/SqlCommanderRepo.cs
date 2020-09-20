@@ -1,8 +1,12 @@
+using System.Data.Common;
 using System.Threading;
 using System.Net.Mime;
 using System.Collections.Generic;
 using Commander.Models;
 using System.Linq;
+using System;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Commander.Data
 {
@@ -15,14 +19,14 @@ namespace Commander.Data
             _context = context;    
         }
 
-        public IEnumerable<Command> GetAllCommands()
+        public async Task<IEnumerable<Command>> GetAllCommands(CancellationToken cancellationToken)
         {
-            return _context.Commands.ToList();
+            return await _context.Commands.ToListAsync(cancellationToken).ConfigureAwait(false);
         }
 
-        public Command GetCommandById(int Id)
+        public async Task<Command> GetCommandById(int id, CancellationToken cancellationToken)
         {
-            var result = _context.Commands.FirstOrDefault(x => x.Id == Id);
+            var result = await _context.Commands.FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
             return result;
         }
     }
