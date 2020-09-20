@@ -63,6 +63,7 @@ namespace Commander.Controllers
             await _repository.SaveChanges(cancellationToken);
             
             var commandResult = _mapper.Map<CommandReadDto>(command);
+            //CreatedAtRoute returns URI of created value. ie api/commands/{id}
             return CreatedAtRoute(nameof(GetCommandById), new {Id = commandResult.Id}, commandResult);
         }
     }
