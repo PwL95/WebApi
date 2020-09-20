@@ -40,5 +40,7 @@ namespace Commander.Data
         {
             return (await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false) >= 0);
         }
+
+        public async Task UpdateCommand(Command command, CancellationToken cancellationToken){ }
     }
 }

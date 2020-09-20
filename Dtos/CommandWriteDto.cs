@@ -2,7 +2,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Commander.Dtos
 {
-    public class CommandCreateDto
+    /// <summary>
+    /// Dto for Create and update
+    /// </summary>
+    public class CommandWriteDto
     {
         [Required]
         [MaxLength(50)]

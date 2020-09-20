@@ -13,10 +13,11 @@ namespace Commander.Profiles
             CreateMap<Command, CommandReadDto>();
             CreateMap<CommandReadDto, Command>();
 
-            CreateMap<CommandCreateDto, Command>();
+            CreateMap<CommandWriteDto, Command>();
+            CreateMap<Command, CommandWriteDto>();
 
-            CreateMap<CommandReadDto, CommandCreateDto>();
-            CreateMap<CommandCreateDto, CommandReadDto>();
+            CreateMap<CommandReadDto, CommandWriteDto>();
+            CreateMap<CommandWriteDto, CommandReadDto>();
         }
     }
 }

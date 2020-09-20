@@ -14,6 +14,8 @@ namespace Commander.Data
         Task<Command> GetCommandById(int id, CancellationToken cancellationToken);
 
         Task CreateCommand(Command command, CancellationToken cancellationToken);
+
+        Task UpdateCommand(Command command, CancellationToken cancellationToken);
         
     }
 }

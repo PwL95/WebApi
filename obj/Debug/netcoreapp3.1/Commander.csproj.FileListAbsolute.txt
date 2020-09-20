@@ -61,3 +61,6 @@ C:\Users\pw\desktop\vscode\net core 3 api\Commander\bin\Debug\netcoreapp3.1\runt
 C:\Users\pw\desktop\vscode\net core 3 api\Commander\obj\Debug\netcoreapp3.1\Commander.csproj.CopyComplete
 C:\Users\pw\desktop\vscode\net core 3 api\Commander\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\pw\desktop\vscode\net core 3 api\Commander\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\pw\desktop\vscode\net core 3 api\Commander\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\pw\desktop\vscode\net core 3 api\Commander\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\pw\desktop\vscode\net core 3 api\Commander\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll

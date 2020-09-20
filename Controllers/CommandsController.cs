@@ -1,3 +1,4 @@
+using System.Data;
 using System.Threading;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using AutoMapper;
 using Commander.Dtos;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Commander.Controllers
 {
@@ -35,7 +37,7 @@ namespace Commander.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CommandReadDto>>> GetAllCommands(CancellationToken cancellationToken)
         {
-            var result = await _repository.GetAllCommands(cancellationToken);
+            var result = await _repository.GetAllCommands(cancellationToken).ConfigureAwait(false);
             return Ok(_mapper.Map<IEnumerable<CommandReadDto>>(result));
         }  
 
@@ -48,23 +50,57 @@ namespace Commander.Controllers
         [HttpGet("{id}", Name="GetCommandById")]
         public async Task<ActionResult<CommandReadDto>> GetCommandById(int id, CancellationToken cancellationToken)
         {
-            var result = await _repository.GetCommandById(id, cancellationToken);
+            var result = await _repository.GetCommandById(id, cancellationToken).ConfigureAwait(false);
             if(result == null) return NotFound();
             return Ok(_mapper.Map<CommandReadDto>(result));
         }
 
         //POST api/commands/
         [HttpPost]
-        public async Task<ActionResult<CommandReadDto>> CreateCommand(CommandCreateDto command, CancellationToken cancellationToken)
+        public async Task<ActionResult<CommandReadDto>> CreateCommand(CommandWriteDto command, CancellationToken cancellationToken)
         {
             var commandModel = _mapper.Map<Command>(command);
 
-            await _repository.CreateCommand(commandModel, cancellationToken);
-            await _repository.SaveChanges(cancellationToken);
+            await _repository.CreateCommand(commandModel, cancellationToken).ConfigureAwait(false);
+            await _repository.SaveChanges(cancellationToken).ConfigureAwait(false);
             
             var commandResult = _mapper.Map<CommandReadDto>(command);
             //CreatedAtRoute returns URI of created value. ie api/commands/{id}
             return CreatedAtRoute(nameof(GetCommandById), new {Id = commandResult.Id}, commandResult);
+        }
+
+        //PUT api/commands/{id}
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateCommand(int id, CommandWriteDto commandDto, CancellationToken cancellationToken)
+        {
+            var command = await _repository.GetCommandById(id, cancellationToken).ConfigureAwait(false);
+            if(command == null) return NotFound();
+            _mapper.Map(commandDto, command);
+
+            await _repository.UpdateCommand(command, cancellationToken).ConfigureAwait(false);
+            await _repository.SaveChanges(cancellationToken);
+
+            return NoContent();
+        }
+
+
+        //PATCH api/commands/{id}
+        [HttpPatch("{id}")]
+        public async Task<ActionResult> PartialUpdateCommand(int id, [FromBody]JsonPatchDocument<CommandWriteDto> commandDoc, CancellationToken cancellationToken)
+        {
+            var command = await _repository.GetCommandById(id, cancellationToken).ConfigureAwait(false);
+            if(command == null) return NotFound();
+
+            var commandToPatch = _mapper.Map<CommandWriteDto>(command);
+            ///ModelState does patch validiations
+            commandDoc.ApplyTo(commandToPatch, ModelState);
+            if(!TryValidateModel(commandToPatch)) return ValidationProblem(ModelState);
+
+            _mapper.Map(commandToPatch, command);
+            await _repository.UpdateCommand(command, cancellationToken).ConfigureAwait(false);
+            await _repository.SaveChanges(cancellationToken).ConfigureAwait(false);
+            
+            return NoContent();
         }
     }
 }
