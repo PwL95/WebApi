@@ -49,10 +49,7 @@ namespace Commander.Controllers
         public async Task<ActionResult<CommandReadDto>> GetCommandById(int id, CancellationToken cancellationToken)
         {
             var result = await _repository.GetCommandById(id, cancellationToken);
-
-            if(result == null)
-                return NotFound();
-
+            if(result == null) return NotFound();
             return Ok(_mapper.Map<CommandReadDto>(result));
         }
 
@@ -61,9 +58,10 @@ namespace Commander.Controllers
         public async Task<ActionResult<CommandReadDto>> CreateCommand(CommandCreateDto command, CancellationToken cancellationToken)
         {
             var commandModel = _mapper.Map<Command>(command);
+
             await _repository.CreateCommand(commandModel, cancellationToken);
             await _repository.SaveChanges(cancellationToken);
-
+            
             var commandResult = _mapper.Map<CommandReadDto>(command);
             return CreatedAtRoute(nameof(GetCommandById), new {Id = commandResult.Id}, commandResult);
         }
