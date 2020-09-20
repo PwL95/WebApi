@@ -41,6 +41,14 @@ namespace Commander.Data
             return (await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false) >= 0);
         }
 
-        public async Task UpdateCommand(Command command, CancellationToken cancellationToken){ }
+        public void UpdateCommand(Command command){ }
+
+        public async Task DeleteCommand(int id, CancellationToken cancellationToken)
+        {
+            var command = await GetCommandById(id, cancellationToken).ConfigureAwait(false);
+            if(command == null) throw new ArgumentNullException();
+
+            _context.Remove(command);
+        }
     }
 }

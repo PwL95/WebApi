@@ -77,7 +77,7 @@ namespace Commander.Controllers
             if(command == null) return NotFound();
             _mapper.Map(commandDto, command);
 
-            await _repository.UpdateCommand(command, cancellationToken).ConfigureAwait(false);
+            _repository.UpdateCommand(command);
             await _repository.SaveChanges(cancellationToken);
 
             return NoContent();
@@ -97,9 +97,18 @@ namespace Commander.Controllers
             if(!TryValidateModel(commandToPatch)) return ValidationProblem(ModelState);
 
             _mapper.Map(commandToPatch, command);
-            await _repository.UpdateCommand(command, cancellationToken).ConfigureAwait(false);
+            _repository.UpdateCommand(command);
             await _repository.SaveChanges(cancellationToken).ConfigureAwait(false);
             
+            return NoContent();
+        }
+
+        //DELETE api/commands/{id}
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteCommand(int id, CancellationToken cancellationToken)
+        {
+            await _repository.DeleteCommand(id, cancellationToken).ConfigureAwait(false);
+            await _repository.SaveChanges(cancellationToken);
             return NoContent();
         }
     }

@@ -15,7 +15,9 @@ namespace Commander.Data
 
         Task CreateCommand(Command command, CancellationToken cancellationToken);
 
-        Task UpdateCommand(Command command, CancellationToken cancellationToken);
+        void UpdateCommand(Command command);
+
+        Task DeleteCommand(int id, CancellationToken cancellationToken);
         
     }
 }
