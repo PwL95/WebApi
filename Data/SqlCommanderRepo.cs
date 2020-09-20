@@ -19,6 +19,12 @@ namespace Commander.Data
             _context = context;    
         }
 
+        public async Task CreateCommand(Command command, CancellationToken cancellationToken)
+        {
+            if(command == null) throw new ArgumentNullException(nameof(command));
+            await _context.AddAsync(command, cancellationToken);
+        }
+
         public async Task<IEnumerable<Command>> GetAllCommands(CancellationToken cancellationToken)
         {
             return await _context.Commands.ToListAsync(cancellationToken).ConfigureAwait(false);
@@ -29,6 +35,10 @@ namespace Commander.Data
             var result = await _context.Commands.FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
             return result;
         }
-    }
 
+        public async Task<bool> SaveChanges(CancellationToken cancellationToken)
+        {
+            return (await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false) >= 0);
+        }
+    }
 }
