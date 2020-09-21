@@ -32,6 +32,8 @@ namespace Commander
             services.AddDbContext<CommanderContext>(opt => opt.UseSqlServer
                 (Configuration.GetConnectionString("CommanderConnection")));
 
+            services.AddAuthentication();
+
             services
                 .AddControllers()
                 .AddNewtonsoftJson(s =>
