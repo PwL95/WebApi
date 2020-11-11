@@ -30,7 +30,7 @@ namespace Commander
         {
             //Setup connection to DB
             services.AddDbContext<CommanderContext>(opt => opt.UseSqlServer
-                (Configuration.GetConnectionString("CommanderConnection")));
+                (Configuration["Connections:DbConnection"]));
 
             services.AddAuthentication();
 

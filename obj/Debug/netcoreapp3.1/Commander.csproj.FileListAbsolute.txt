@@ -63,4 +63,4 @@ C:\Users\pw\desktop\vscode\net core 3 api\Commander\bin\Debug\netcoreapp3.1\Auto
 C:\Users\pw\desktop\vscode\net core 3 api\Commander\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\pw\desktop\vscode\net core 3 api\Commander\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\pw\desktop\vscode\net core 3 api\Commander\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
-C:\Users\pw\Desktop\vscode\net core 3 api\commander\obj\Debug\netcoreapp3.1\scopedcss\bundle\Commander.styles.css
+C:\Users\pw\desktop\vscode\net core 3 api\commander\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
