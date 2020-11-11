@@ -60,10 +60,7 @@ namespace Commander.Controllers
         public async Task<ActionResult<CommandReadDto>> CreateCommand(CommandWriteDto command, CancellationToken cancellationToken)
         {
             var commandModel = _mapper.Map<Command>(command);
-
             await _repository.CreateCommand(commandModel, cancellationToken).ConfigureAwait(false);
-            await _repository.SaveChanges(cancellationToken).ConfigureAwait(false);
-            
             var commandResult = _mapper.Map<CommandReadDto>(command);
             //CreatedAtRoute returns URI of created value. ie api/commands/{id}
             return CreatedAtRoute(nameof(GetCommandById), new {Id = commandResult.Id}, commandResult);
@@ -77,9 +74,7 @@ namespace Commander.Controllers
             if(command == null) return NotFound();
             _mapper.Map(commandDto, command);
 
-            _repository.UpdateCommand(command);
-            await _repository.SaveChanges(cancellationToken);
-
+            await _repository.UpdateCommand(command, cancellationToken);
             return NoContent();
         }
 
@@ -97,8 +92,7 @@ namespace Commander.Controllers
             if(!TryValidateModel(commandToPatch)) return ValidationProblem(ModelState);
 
             _mapper.Map(commandToPatch, command);
-            _repository.UpdateCommand(command);
-            await _repository.SaveChanges(cancellationToken).ConfigureAwait(false);
+            await _repository.UpdateCommand(command, cancellationToken);
             
             return NoContent();
         }
@@ -108,7 +102,6 @@ namespace Commander.Controllers
         public async Task<ActionResult> DeleteCommand(int id, CancellationToken cancellationToken)
         {
             await _repository.DeleteCommand(id, cancellationToken).ConfigureAwait(false);
-            await _repository.SaveChanges(cancellationToken);
             return NoContent();
         }
     }
