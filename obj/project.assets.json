@@ -5453,11 +5453,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pw\\desktop\\vscode\\net core 3 api\\Commander\\Commander.csproj",
+      "projectUniqueName": "C:\\Users\\pw\\Desktop\\vscode\\net core 3 api\\commander\\Commander.csproj",
       "projectName": "Commander",
-      "projectPath": "C:\\Users\\pw\\desktop\\vscode\\net core 3 api\\Commander\\Commander.csproj",
+      "projectPath": "C:\\Users\\pw\\Desktop\\vscode\\net core 3 api\\commander\\Commander.csproj",
       "packagesPath": "C:\\Users\\pw\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pw\\desktop\\vscode\\net core 3 api\\Commander\\obj\\",
+      "outputPath": "C:\\Users\\pw\\Desktop\\vscode\\net core 3 api\\commander\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\pw\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5472,6 +5472,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -5483,6 +5484,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Automapper.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
@@ -5521,6 +5523,16 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.2, 3.1.2]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[3.1.7, 3.1.7]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -5529,7 +5541,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100-rc.2.20479.15\\RuntimeIdentifierGraph.json"
       }
     }
   }

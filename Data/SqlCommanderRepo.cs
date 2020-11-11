@@ -38,7 +38,7 @@ namespace Commander.Data
 
         public async Task<bool> SaveChanges(CancellationToken cancellationToken)
         {
-            return (await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false) >= 0);
+            return await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false) >= 0;
         }
 
         public void UpdateCommand(Command command){ }
